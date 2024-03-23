@@ -6,7 +6,7 @@ const errorMessageList = {
     409: "Conflict",
 }
 
-const HttpError = (status, message) => {
+const HttpError = (status, message = errorMessageList[status]) => {
     const error = new Error(message)
     error.status = status
     return true

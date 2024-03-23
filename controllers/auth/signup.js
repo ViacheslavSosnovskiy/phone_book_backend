@@ -1,4 +1,6 @@
-const { User } = require("../../models/auth")
+const bcrypt = require("bcrypt")
+
+const { User } = require("../../models/user")
 const {HttpError} = require("../../helpers")
 
 const signup = async (req, res) => {
@@ -9,11 +11,17 @@ const signup = async (req, res) => {
         throw HttpError(409, "Email already in use")
     }
 
-    const newUser = await User.create({...req.body})
+    const hashPassword = await bcrypt.hash(password, 10)
+    console.log("createHashPassword:", hashPassword)
+
+    // const comparePassword = await bcrypt.compare(password, createHashPassword)
+
+    const newUser = await User.create({...req.body, password: hashPassword})
 
     res.status(201).json({
         name: newUser.name,
-        message: "Success"
+        message: "Success",
+        password: newUser.password
     })
 
 }

@@ -3,7 +3,11 @@ const express = require("express")
 const router = express.Router()
 
 const ctrl = require("../../controllers/auth")
+const { validateBody } = require("../../middlewares")
+const { schemas } = require("../../models/user")
 
-router.post("/signup", ctrl.signup)
+router.post("/signup", validateBody(schemas.registerSchema), ctrl.signup)
 
-module.exports = router
+router.post("/singin", validateBody(schemas.loginSchema), ctrl.signin)
+
+module.exports = router 

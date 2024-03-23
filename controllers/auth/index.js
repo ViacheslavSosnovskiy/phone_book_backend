@@ -1,7 +1,9 @@
 const signup = require("./signup")
 const signin = require("./signin")
 
+const {ctrlWrapper} = require("../../helpers")
+
 module.exports = {
-    signup,
-    signin,
-}
+    signup: ctrlWrapper(signup),
+    signin: ctrlWrapper(signin),
+}   
