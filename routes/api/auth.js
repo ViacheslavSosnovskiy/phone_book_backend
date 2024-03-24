@@ -8,6 +8,6 @@ const { schemas } = require("../../models/user")
 
 router.post("/signup", validateBody(schemas.registerSchema), ctrl.signup)
 
-router.post("/singin", validateBody(schemas.loginSchema), ctrl.signin)
+router.post("/signin", validateBody(schemas.loginSchema), ctrl.signin)
 
 module.exports = router 
